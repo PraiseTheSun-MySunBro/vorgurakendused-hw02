@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/authentication
+    username: postgres
+    password: postgres
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+  jackson:
+    default-property-inclusion: non_empty
+
+jwt:
+  secret: Vc88mvueeo4pEwh2lAee2x64yd8kWan53Az1L1PYBG0F3jRCTa6IBVNyOGEJZErS  # min 32 length
+  header: Authorization
+  token-prefix: Bearer
+  expiration-time: 86400  # 60 * 60 * 24 -> 1 day (in seconds)
+
+cors:
+  origins:
+    - http://localhost:8080
+  methods:
+    - '*'
+  headers:
+    - X-Requested-With
+    - Origin
+    - Content-Type
+    - Authorization
+    - X-Frame-Options
+
+server:
+  port: 9000
