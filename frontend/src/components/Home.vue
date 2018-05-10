@@ -9,7 +9,7 @@
             <div class="card-body">
               <h2 class="card-title">{{ data.post.title }}</h2>
               <p class="card-text">{{ data.post.content }}</p>
-              <a href="#" class="btn btn-primary">Read More &rarr;</a>
+              <button class="btn btn-danger">Delete</button>
             </div>
             <div class="card-footer text-muted">
               Posted on {{ data.post.createdAt }} by {{ data.account.username }}
