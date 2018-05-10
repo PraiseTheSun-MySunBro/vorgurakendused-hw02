@@ -10,8 +10,7 @@
   <b-collapse is-nav id="nav_collapse">
 
     <b-navbar-nav>
-      <b-nav-item :to="{ name: 'Home' }">Add post</b-nav-item>
-      <b-nav-item href="#" disabled>Disabled</b-nav-item>
+      <b-nav-item :to="{ name: 'NewPost' }">Add post</b-nav-item>
     </b-navbar-nav>
 
     <!-- Right aligned nav items -->
