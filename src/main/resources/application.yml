@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/authentication
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://ec2-54-246-84-200.eu-west-1.compute.amazonaws.com:5432/d62bieuiq99qos?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+    username: vciowxblnmnnma
+    password: a489058d2038caeb4a30346de2e4e091fef51a5031200e7b12118fdee3aef7d1
   jpa:
     show-sql: true
     hibernate:
