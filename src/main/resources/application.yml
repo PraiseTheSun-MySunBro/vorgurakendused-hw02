@@ -4,6 +4,8 @@ spring:
     url: jdbc:postgresql://ec2-54-246-84-200.eu-west-1.compute.amazonaws.com:5432/d62bieuiq99qos?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
     username: vciowxblnmnnma
     password: a489058d2038caeb4a30346de2e4e091fef51a5031200e7b12118fdee3aef7d1
+    tomcat:
+      max-active: 1
   jpa:
     show-sql: true
     hibernate:
@@ -14,6 +16,9 @@ spring:
           use_jdbc_metadata_defaults: false
   jackson:
     default-property-inclusion: non_empty
+  mvc:
+    view:
+      suffix: .html
 
 jwt:
   secret: Vc88mvueeo4pEwh2lAee2x64yd8kWan53Az1L1PYBG0F3jRCTa6IBVNyOGEJZErS  # min 32 length
@@ -23,7 +28,7 @@ jwt:
 
 cors:
   origins:
-    - http://localhost:8080
+    - '*'
   methods:
     - '*'
   headers:
