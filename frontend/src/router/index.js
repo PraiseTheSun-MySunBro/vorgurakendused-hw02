@@ -10,28 +10,36 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/home',
-      name: 'Home',
-      component: Home
-    },
-    {
       path: '/',
-      redirect: '/login'
+      name: 'Home',
+      component: Home,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
+      meta: {
+        auth: false
+      }
     },
     {
       path: '/signup',
       name: 'Signup',
-      component: Signup
+      component: Signup,
+      meta: {
+        auth: false
+      }
     },
     {
-      path: '/newpost',
+      path: '/post/add',
       name: 'NewPost',
-      component: NewPost
+      component: NewPost,
+      meta: {
+        auth: true
+      }
     }
   ]
 })

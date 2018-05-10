@@ -1,27 +1,28 @@
 package ee.ttu.authentication.service;
 
+import ee.ttu.authentication.dto.PostAccountDto;
 import ee.ttu.authentication.dto.PostDto;
 import ee.ttu.authentication.model.Account;
 import ee.ttu.authentication.model.Post;
+import ee.ttu.authentication.repository.auth.AccountRepository;
 import ee.ttu.authentication.repository.auth.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
 public class PostService {
 
     private final PostRepository postRepository;
+    private final AccountRepository accountRepository;
 
     @Autowired
-    public PostService(PostRepository postRepository) {
+    public PostService(PostRepository postRepository, AccountRepository accountRepository) {
         this.postRepository = postRepository;
+        this.accountRepository = accountRepository;
     }
 
     public Post insert(PostDto postDto, Account account) {
@@ -41,7 +42,12 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public List<Post> getAllPosts() {
-        return postRepository.findAll();
+    public List<PostAccountDto> getAllPosts() {
+        List<Post> posts = postRepository.findAll();
+        List<PostAccountDto> postAccounts = new ArrayList<>();
+        for (Post post : posts) {
+            postAccounts.add(new PostAccountDto(post, post.getOwner()));
+        }
+        return postAccounts;
     }
 }

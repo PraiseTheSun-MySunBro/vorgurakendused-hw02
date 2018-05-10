@@ -25,7 +25,7 @@ public class AuthController {
         this.accountService = accountService;
     }
 
-    @PutMapping(value = "/register", produces = "application/json")
+    @PutMapping(value = "/signup", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> register(@Valid @RequestBody UserCredentialDto userCredentialDto) {
         Account account = accountService.registerAccount(userCredentialDto);
         return new ResponseEntity<>(account, HttpStatus.CREATED);

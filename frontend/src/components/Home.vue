@@ -1,18 +1,18 @@
 <template>
   <div class="container">
-      <div class="row">
+      <div class="row" v-for="(data, index) in posts" :key="index">
         <!-- Blog Entries Column -->
         <div class="col-md-12">
           <!-- Blog Post -->
           <div class="card mb-4">
             <!-- <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap"> -->
             <div class="card-body">
-              <h2 class="card-title">Post Title</h2>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
+              <h2 class="card-title">{{ data.post.title }}</h2>
+              <p class="card-text">{{ data.post.content }}</p>
               <a href="#" class="btn btn-primary">Read More &rarr;</a>
             </div>
             <div class="card-footer text-muted">
-              Posted on May 10, 2018 by Erki-kun
+              Posted on {{ data.post.createdAt }} by {{ data.account.username }}
             </div>
           </div>
         </div>
@@ -24,6 +24,21 @@
 export default {
   name: 'Home',
   data () {
+    return {
+      posts: []
+    }
+  },
+  beforeRouteEnter (to, from, next) {
+    axios.get('/posts')
+      .then(res => {
+        next(vm => {
+          console.log(res.data)
+          vm.posts = res.data
+        })
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
 }
 </script>

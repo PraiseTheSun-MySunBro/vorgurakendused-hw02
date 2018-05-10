@@ -13,15 +13,15 @@
             <div class="card-body">
                 <div class="form-group">
                   <label><h1>Title:</h1></label>
-                  <input type="text" class="form-control col-4">
+                  <input type="text" class="form-control col-4" v-model="postData.title">
                 </div>
                 <div class="form-group">
                   <label><h4>Content:</h4></label>
-                  <textarea class="form-control" rows="3"></textarea>
+                  <textarea class="form-control" rows="3" v-model="postData.content"></textarea>
                 </div>
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary float-right">Publish</button>
+              <button class="btn btn-primary float-right" @click="addPost">Publish</button>
             </div>
           </div>
         </div>
@@ -31,9 +31,30 @@
 </template>
 
 <script>
-  export default {
-
+export default {
+  data () {
+    return {
+      postData: {
+        title: '',
+        content: ''
+      }
+    }
+  },
+  methods: {
+    addPost () {
+      axios.put('/posts', {
+        title: this.postData.title,
+        content: this.postData.content
+      })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.error(err.response)
+        })
+    }
   }
+}
 </script>
 
 <style scoped>

@@ -22,7 +22,7 @@
           <em>User</em>
         </template>
         <b-dropdown-item href="#">Profile</b-dropdown-item>
-        <b-dropdown-item :to="{ name: 'Login' }">Signout</b-dropdown-item>
+        <b-dropdown-item :to="{ name: 'Login' }" @click="logout">Signout</b-dropdown-item>
       </b-nav-item-dropdown>
     </b-navbar-nav>
 
@@ -34,6 +34,14 @@
 export default {
   name: 'Navigation',
   data () {
+    return {
+
+    }
+  },
+  methods: {
+    logout () {
+      this.$auth.logout()
+    }
   }
 }
 </script>
