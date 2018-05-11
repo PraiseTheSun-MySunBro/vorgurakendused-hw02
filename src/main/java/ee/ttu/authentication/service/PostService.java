@@ -50,4 +50,18 @@ public class PostService {
         }
         return postAccounts;
     }
+
+    public boolean delete(Long id, Account account) {
+        Optional<Post> optionalPost = postRepository.findById(id);
+
+        if (!optionalPost.isPresent()) return false;
+
+        Post post = optionalPost.get();
+
+        if (post.getOwner() == null || post.getOwner().getId() == 0 || account == null || account.getId() == null) return false;
+        if (!post.getOwner().getId().equals(account.getId())) return false;
+
+        postRepository.deleteById(id);
+        return true;
+    }
 }

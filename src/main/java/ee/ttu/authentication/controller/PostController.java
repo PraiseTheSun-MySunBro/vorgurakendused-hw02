@@ -55,9 +55,11 @@ public class PostController {
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
-    @DeleteMapping(produces = "application/json")
-    public ResponseEntity<?> remove() {
-        return null;
+    @DeleteMapping(value = "/{id}", produces = "application/json")
+    public ResponseEntity<?> remove(@PathVariable Long id, HttpServletRequest request) {
+        boolean deleted = postService.delete(id, getAccountByRequest(request));
+        if (!deleted) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     private Account getAccountByRequest(HttpServletRequest request) {

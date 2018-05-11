@@ -9,7 +9,7 @@
             <div class="card-body">
               <h2 class="card-title">{{ data.post.title }}</h2>
               <p class="card-text">{{ data.post.content }}</p>
-              <button class="btn btn-danger">Delete</button>
+              <button class="btn btn-danger" v-if="data.account.id === currentUser.id" @click="deletePost(data.post, index)">Delete</button>
             </div>
             <div class="card-footer text-muted">
               Posted on {{ data.post.createdAt }} by {{ data.account.username }}
@@ -25,8 +25,30 @@ export default {
   name: 'Home',
   data () {
     return {
-      posts: []
+      posts: [],
+      currentUser: {}
     }
+  },
+  methods: {
+    deletePost (post, idx) {
+      axios.delete(`/posts/${post.id}`)
+        .then(res => {
+          console.log(res.data)
+          this.posts.splice(idx, 1)
+        })
+        .catch(err => {
+          console.error(err.response)
+        })
+    }
+  },
+  mounted () {
+    axios.get('/auth/user')
+      .then(res => {
+        this.currentUser = res.data
+      })
+      .catch(err => {
+        console.error(err.response)
+      })
   },
   beforeRouteEnter (to, from, next) {
     axios.get('/posts')

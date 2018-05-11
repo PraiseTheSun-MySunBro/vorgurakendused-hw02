@@ -17,7 +17,8 @@ Vue.config.devtools = true
 
 Vue.router = router
 
-axios.defaults.baseURL = 'http://localhost:9000/'
+const production = process.env.NODE_ENV === 'production'
+axios.defaults.baseURL = production ? 'https://vorgurakendused-hw02.herokuapp.com/' : 'http://localhost:9000/'
 
 // Vue.use(Vuelidate)
 Vue.use(BootstrapVue)
